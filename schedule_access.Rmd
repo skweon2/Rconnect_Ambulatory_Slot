@@ -79,28 +79,27 @@ suppressMessages({
 })
 source("access_process.R")
 
+hisotrical.data.prev <- readRDS("/data/Ambulatory/Data/historical_data.rds")
+hisotrical.data.prev <- hisotrical.data.prev %>% filter(!(Appt.DateYear %in% c("2022-04-12")))
+historical.data <- bind_rows(hisotrical.data.prev,historical.data)
+saveRDS(historical.data, "/data/Ambulatory/Data/historical_data.rds")
 
-# hisotrical.data.prev <- readRDS("/data/Ambulatory/Data/New Data/historical_data_2021.rds")
-# historical.data <- bind_rows(hisotrical.data.prev,historical.data)
-# saveRDS(historical.data, "/data/Ambulatory/Data/New Data/historical_data.rds")
-# file.remove("/data/Ambulatory/Data/New Data/historical_data_2021.rds")
-# 
-# 
-# population.data_filtered.prev <- readRDS("/data/Ambulatory/Data/New Data/population_data_2021.rds")
-# population.data_filtered <- bind_rows(population.data_filtered,population.data_filtered.prev)
-# saveRDS(population.data_filtered, "/data/Ambulatory/Data/New Data/population_data.rds")
-# file.remove("/data/Ambulatory/Data/New Data/population_data_2021.rds")
+
+population.data_filtered.prev <- readRDS("/data/Ambulatory/Data/population_data.rds")
+population.data_filtered.prev <- population.data_filtered.prev %>% filter(!(Appt.DateYear %in% c("2022-04-12")))
+population.data_filtered <- bind_rows(population.data_filtered,population.data_filtered.prev)
+saveRDS(population.data_filtered, "/data/Ambulatory/Data/population_data.rds")
 
 
 utilization.data.prev <- readRDS("/data/Ambulatory/Data/utilization_data.rds")
+utilization.data.prev <- utilization.data.prev %>% filter(!(Appt.DateYear %in% c("2022-04-12")))
 utilization.data <- bind_rows(utilization.data,utilization.data.prev)
 saveRDS(utilization.data, "/data/Ambulatory/Data/utilization_data.rds")
 
 
-# holid.prev <- read_feather("/data/Ambulatory/Data/New Data/holid_2021.feather")
-# holid <- bind_rows(holid, holid.prev)
-# write_feather(holid, "/data/Ambulatory/Data/New Data/holid.feather")
-# file.remove("/data/Ambulatory/Data/New Data/holid_2021.feather")
+holid.prev <- read_feather("/data/Ambulatory/Data/holid.feather")
+holid <- bind_rows(holid, holid.prev)
+write_feather(holid, "/data/Ambulatory/Data/holid.feather")
 
 
 ```

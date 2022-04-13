@@ -73,14 +73,10 @@ suppressMessages({
 memory.limit(size = 8000000)
 
 process_data <- function(access_data){
-  #site_ref <- read_excel("/data/Ambulatory/Data/Mappings/Ambulatory Department Mapping (Master).xlsx",sheet = "Mapping")
-  
   ### (3) Pre-process data ----------------------------------------------------------------------------------
   # SCheduling Data Pre-processing
   data.raw <- access_data # Assign scheduling Data
-  # data.raw$campus_new <- site_ref$`Site`[match(data.raw$DEPARTMENT_NAME,site_ref$`Department Name`)] # Crosswalk Campus to Site by Department Name
-  # data.raw <- data.raw %>% filter(!campus_new == "NA") %>% filter(!campus_new %in% c("Other","OTHER","EHS")) ## Exclude Mapped Sites: Other, OTHER, EHS
-  
+
   # Dummy columns until they are added to Clarity table: SEX, FPA
   data.raw$SEX <- "Male"
   data.raw$VITALS_TAKEN_TM <- ""
@@ -253,7 +249,6 @@ access_raw <- dbGetQuery(con, access_sql)
 
 process_data_run <- process_data(access_raw)
 data.subset.new <- process_data_run[[1]]
-#slot.data.subset <- process_data_run[[1]]
 holid <- process_data_run[[2]]
 
 
