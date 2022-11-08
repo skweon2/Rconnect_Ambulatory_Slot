@@ -81,7 +81,7 @@ source("slot_process.R")
 
 slot.data.prev <- readRDS("/data/Ambulatory/Data/slot_data.rds")
 slot.data.subset <- bind_rows(slot.data.prev,slot.data.subset)
-saveRDS(slot.data.subset, "/data/Ambulatory/Data/slot_data.rds")
+saveRDS(slot.data.subset, "/data/Ambulatory/Data_Updated/slot_data.rds")
 
 
 
